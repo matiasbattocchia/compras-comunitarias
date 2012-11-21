@@ -1,0 +1,21 @@
+%h1 Listing line_bundles
+
+%table
+  %tr
+    %th Order
+    %th Quantity
+    %th
+    %th
+    %th
+
+  - @line_bundles.each do |line_bundle|
+    %tr
+      %td= line_bundle.order
+      %td= line_bundle.quantity
+      %td= link_to 'Show', line_bundle
+      %td= link_to 'Edit', edit_line_bundle_path(line_bundle)
+      %td= link_to 'Destroy', line_bundle, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Line bundle', new_line_bundle_path

@@ -1,0 +1,15 @@
+= simple_form_for(@bundle) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :product
+    = f.input :size
+    = f.input :weight
+    = f.input :cost
+    = f.input :crate_cost
+    = f.input :with_freight_cost
+    = f.input :price
+    = f.input :status
+
+  .form-actions
+    = f.button :submit

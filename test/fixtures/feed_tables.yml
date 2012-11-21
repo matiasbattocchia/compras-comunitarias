@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  balance: 9.99
+  unload_address: MyString
+  sale_address: MyString
+  open_time: 2012-10-01 15:59:13
+  close_time: 2012-10-01 15:59:13
+  modality: MyString
+  other_activities: MyString
+  basic_unit: 
+
+two:
+  balance: 9.99
+  unload_address: MyString
+  sale_address: MyString
+  open_time: 2012-10-01 15:59:13
+  close_time: 2012-10-01 15:59:13
+  modality: MyString
+  other_activities: MyString
+  basic_unit: 

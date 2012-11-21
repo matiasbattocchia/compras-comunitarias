@@ -1,0 +1,33 @@
+%h1 Listing bundles
+
+%table
+  %tr
+    %th Product
+    %th Size
+    %th Weight
+    %th Cost
+    %th Crate cost
+    %th With freight cost
+    %th Price
+    %th Status
+    %th
+    %th
+    %th
+
+  - @bundles.each do |bundle|
+    %tr
+      %td= bundle.product
+      %td= bundle.size
+      %td= bundle.weight
+      %td= bundle.cost
+      %td= bundle.crate_cost
+      %td= bundle.with_freight_cost
+      %td= bundle.price
+      %td= bundle.status
+      %td= link_to 'Show', bundle
+      %td= link_to 'Edit', edit_bundle_path(bundle)
+      %td= link_to 'Destroy', bundle, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Bundle', new_bundle_path

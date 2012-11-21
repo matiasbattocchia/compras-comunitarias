@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Product:
+  = @bundle.product
+%p
+  %b Size:
+  = @bundle.size
+%p
+  %b Weight:
+  = @bundle.weight
+%p
+  %b Cost:
+  = @bundle.cost
+%p
+  %b Crate cost:
+  = @bundle.crate_cost
+%p
+  %b With freight cost:
+  = @bundle.with_freight_cost
+%p
+  %b Price:
+  = @bundle.price
+%p
+  %b Status:
+  = @bundle.status
+
+= link_to 'Edit', edit_bundle_path(@bundle)
+\|
+= link_to 'Back', bundles_path

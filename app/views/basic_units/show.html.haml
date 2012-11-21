@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @basic_unit.name
+%p
+  %b Commune:
+  = @basic_unit.commune
+%p
+  %b Neighborhood:
+  = @basic_unit.neighborhood
+%p
+  %b Address:
+  = @basic_unit.address
+
+= link_to 'Edit', edit_basic_unit_path(@basic_unit)
+\|
+= link_to 'Back', basic_units_path

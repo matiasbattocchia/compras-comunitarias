@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @product.name
+%p
+  %b Weight:
+  = @product.weight
+%p
+  %b Quantity:
+  = @product.quantity
+%p
+  %b Cost:
+  = @product.cost
+%p
+  %b Freight modifier:
+  = @product.freight_modifier
+%p
+  %b Price modifier:
+  = @product.price_modifier
+
+= link_to 'Edit', edit_product_path(@product)
+\|
+= link_to 'Back', products_path

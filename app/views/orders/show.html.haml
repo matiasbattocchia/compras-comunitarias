@@ -1,0 +1,22 @@
+%p#notice= notice
+
+%table.table.table-striped
+  %tr
+    %th Producto
+    %th Tamano
+    %th Peso
+    %th Precio
+    %th Embalaje
+    %th Bultos
+  - @line_bundles.each do |line_bundle|
+    %tr
+      %td= line_bundle.bundle.product
+      %td= line_bundle.bundle.size.to_s + ' unidades'
+      %td= line_bundle.bundle.weight.to_s + ' kg'
+      %td= '$ ' + line_bundle.bundle.with_freight_cost.to_s
+      %td= '$ ' + line_bundle.bundle.crate_cost.to_s
+      %td= line_bundle.quantity.to_s + ' bultos' 
+
+= link_to 'Editar', edit_order_path(@order), class: 'btn btn-primary'
+= link_to 'Eliminar', @order, :confirm => '¿Eliminar el pedido?', :method => :delete, class: 'btn btn-warning'
+= link_to 'Volver', orders_path, class: 'btn'

@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Balance:
+  = @feed_table.balance
+%p
+  %b Unload address:
+  = @feed_table.unload_address
+%p
+  %b Sale address:
+  = @feed_table.sale_address
+%p
+  %b Open time:
+  = @feed_table.open_time
+%p
+  %b Close time:
+  = @feed_table.close_time
+%p
+  %b Modality:
+  = @feed_table.modality
+%p
+  %b Other activities:
+  = @feed_table.other_activities
+%p
+  %b Basic unit:
+  = @feed_table.basic_unit
+
+= link_to 'Edit', edit_feed_table_path(@feed_table)
+\|
+= link_to 'Back', feed_tables_path

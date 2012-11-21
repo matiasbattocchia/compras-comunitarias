@@ -1,0 +1,33 @@
+%h1 Listing feed_tables
+
+%table
+  %tr
+    %th Balance
+    %th Unload address
+    %th Sale address
+    %th Open time
+    %th Close time
+    %th Modality
+    %th Other activities
+    %th Basic unit
+    %th
+    %th
+    %th
+
+  - @feed_tables.each do |feed_table|
+    %tr
+      %td= feed_table.balance
+      %td= feed_table.unload_address
+      %td= feed_table.sale_address
+      %td= feed_table.open_time
+      %td= feed_table.close_time
+      %td= feed_table.modality
+      %td= feed_table.other_activities
+      %td= feed_table.basic_unit
+      %td= link_to 'Show', feed_table
+      %td= link_to 'Edit', edit_feed_table_path(feed_table)
+      %td= link_to 'Destroy', feed_table, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Feed table', new_feed_table_path

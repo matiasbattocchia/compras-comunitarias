@@ -1,0 +1,22 @@
+= form_for @basic_unit do |f|
+  -if @basic_unit.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@basic_unit.errors.count, "error")} prohibited this basic_unit from being saved:"
+      %ul
+        - @basic_unit.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :commune
+    = f.text_field :commune
+  .field
+    = f.label :neighborhood
+    = f.text_field :neighborhood
+  .field
+    = f.label :address
+    = f.text_field :address
+  .actions
+    = f.submit 'Save'

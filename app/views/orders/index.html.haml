@@ -1,0 +1,19 @@
+%h1 Pedidos
+
+%table.table.table-hover
+  %tr
+    %th Fecha
+    %th Peso
+    %th Costo
+    %th Embalaje
+    %th Total
+
+  - @orders.each do |order|
+    %tr{'data-link' => order_path(order)}
+      %td= order.created_at.strftime('%d %b')
+      %td= order.weight.to_s + ' kg'
+      %td= '$ ' + order.with_freight_cost.to_s
+      %td= '$ ' + order.crate_cost.to_s
+      %td= '$ ' + (order.with_freight_cost + order.crate_cost).to_s
+
+= link_to 'Nuevo pedido', new_order_path, class: 'btn btn-primary'
