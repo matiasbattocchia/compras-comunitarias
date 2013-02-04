@@ -1,28 +1,9 @@
-= form_for @product do |f|
-  -if @product.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
-      %ul
-        - @product.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :weight
-    = f.number_field :weight
-  .field
-    = f.label :quantity
-    = f.number_field :quantity
-  .field
-    = f.label :cost
-    = f.text_field :cost
-  .field
-    = f.label :freight_modifier
-    = f.number_field :freight_modifier
-  .field
-    = f.label :price_modifier
-    = f.number_field :price_modifier
-  .actions
-    = f.submit 'Save'
+%h2 Editando atributos
+= simple_form_for @product, :html => { :class => 'form-horizontal' } do |f|
+  = f.input :description
+  = f.input :quantity
+  = f.input :weight, input_html: { min: 0 }
+  = f.association :supplier
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), :back, :class => 'btn'

@@ -1,3 +1,16 @@
-%h1 Nuevo pedido
+- model_class = Order
+.page-header
+  %h1=t '.title', :default => t('helpers.titles.new') + ' ' + model_class.model_name.human
 
-= render 'form'
+.row-fluid
+
+  .span2
+    %ul.nav.nav-list.well
+      %li.nav-header= t('.actions', :default => t("helpers.actions"))
+      %li= link_to t('.list', :default => t("helpers.links.list")), orders_path
+      %li.active= link_to t('.new', :default => t("helpers.links.new")), new_order_path
+
+  .span10
+    = bootstrap_flash
+    
+    = render :partial => "form"

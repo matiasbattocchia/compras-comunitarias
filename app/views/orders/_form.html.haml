@@ -1,42 +1,4 @@
-= form_tag @path, :method => @method do
-  -if @order.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
-      %ul
-        - @order.errors.full_messages.each do |msg|
-          %li= msg
-
-  %table.table
-    //%colgroup
-    //  %col#product
-    //  %col#values{'span' => '3'}
-    //  %col#quantity
-    %tr
-      %th Producto
-      %th Peso
-      %th Precio
-      %th Embalaje
-      %th Bultos
-    - @bundles.each do |bundle|
-      %tr.unit{'data-id' => bundle.id, 'data-weight' => bundle.weight, 'data-with_freight_cost' => bundle.with_freight_cost, 'data-crate_cost' => bundle.crate_cost}
-        %td{'rowspan' => '2'}= bundle.product + ' (' + bundle.size.to_s + ' unidades)'
-        %td.weight= ' kg'
-        %td.with_freight_cost= '$'
-        %td.crate_cost= '$'
-        %td{'rowspan' => '2'}
-          = hidden_field_tag 'bundles[' + bundle.product.downcase + '][bundle_id]', bundle.id, id: nil
-          = number_field_tag 'bundles[' + bundle.product.downcase + '][quantity]', (b = @order.line_bundles.where(:bundle_id => bundle.id).first; if b then b.quantity else 0 end), id: nil, class: 'input-mini quantity'
-      %tr.subtotal{'data-id' => bundle.id}
-        %td.weight= ' kg'
-        %td.with_freight_cost= '$'
-        %td.crate_cost= '$'
-    %tr.total
-      %th Totales
-      %th.weight= ' kg'
-      %th.with_freight_cost= '$'
-      %th.crate_cost= '$'
-      %th.quantity
-
-  %p= 'Costo + Embalaje: $'
-  = submit_tag 'Guardar', name: 'save', class: 'btn btn-primary'
-  = submit_tag 'Volver', name: 'back', class: 'btn'
+= simple_form_for @order, :html => { :class => 'form-horizontal' } do |f|
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), :back, :class => 'btn'

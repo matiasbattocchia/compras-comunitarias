@@ -1,0 +1,18 @@
+- model_class = Purchase
+.page-header
+  %h1
+    =t '.title', :default => model_class.model_name.human
+    %small Nueva
+
+.row-fluid
+
+  .span2
+    %ul.nav.nav-list.well
+      %li.nav-header= t('.actions', :default => t("helpers.actions"))
+      %li= link_to t('.list', :default => t("helpers.links.list")), purchases_path
+      %li.active= link_to t('.new', :default => t("helpers.links.new")), new_purchase_path
+
+  .span10
+    = bootstrap_flash
+    
+    = render :partial => "form"

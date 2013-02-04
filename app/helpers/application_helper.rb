@@ -8,4 +8,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def number_to_weight number
+    number_to_human number, :units => :weight, separator: ','
+  end
 end

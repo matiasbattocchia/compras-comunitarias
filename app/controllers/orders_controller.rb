@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
     @path = '/orders'
     @method = 'post'
     @order = Order.new
-    @bundles = Bundle.where(:status => 'active')
+    @bundles = Bundle.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +43,6 @@ class OrdersController < ApplicationController
     @path = '/orders/' + params[:id]
     @method = 'put'
     @order = Order.find(params[:id])
-    @bundles = Bundle.where(:status => 'active')
   end
 
   # POST /orders

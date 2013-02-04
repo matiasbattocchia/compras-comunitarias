@@ -1,20 +1,17 @@
 ComprasComunitarias::Application.routes.draw do
-  resources :line_bundles
+  resources :suppliers
 
-  resources :attendances
+  get 'purchases/:id/preselect' => 'purchases#edit_preselection'
+  put 'purchases/:id/preselect' => 'purchases#update_preselection'
+  get 'purchases/:id/load_prices' => 'purchases#edit_prices'
+  put 'purchases/:id/load_prices' => 'purchases#update_prices'
+  get 'purchases/:id/set_margins' => 'purchases#edit_margins'
+  put 'purchases/:id/set_margins' => 'purchases#update_margins'
 
-  resources :meetings
-
-  resources :bundles
+  resources :purchases
 
   resources :orders
-
-  resources :payments
-
-  resources :feed_tables
-
-  resources :basic_units
-
+  
   resources :products
 
   # The priority is based upon order of creation:

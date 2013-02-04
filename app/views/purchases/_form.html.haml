@@ -1,0 +1,7 @@
+%h2 Editando atributos
+= simple_form_for @purchase, :html => { :class => 'form-horizontal' } do |f|
+  = f.input :date
+  = f.input :status
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), :back, :class => 'btn'

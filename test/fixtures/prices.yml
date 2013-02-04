@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cost: 9.99
+  sale: 9.99
+  purchase: 9.99
+  crate: 9.99
+  provisional: 9.99
+  preselected: false
+  product: 
+
+two:
+  cost: 9.99
+  sale: 9.99
+  purchase: 9.99
+  crate: 9.99
+  provisional: 9.99
+  preselected: false
+  product: 

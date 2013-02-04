@@ -1,8 +1,5 @@
 class Product < ActiveRecord::Base
-  has_many :line_bundles
-  attr_accessible :cost, :freight_modifier, :name, :price_modifier, :quantity, :weight
-
-  def price
-    cost + (cost * freight_modifier) / 100
-  end
+  belongs_to :supplier
+  has_many :prices
+  attr_accessible :description, :quantity, :weight, :supplier_id
 end

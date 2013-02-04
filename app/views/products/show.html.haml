@@ -1,24 +1,62 @@
-%p#notice= notice
+- model_class = Product
+.page-header
+  %h1
+    =t '.title', :default => model_class.model_name.human
+    %small= @product.description
 
-%p
-  %b Name:
-  = @product.name
-%p
-  %b Weight:
-  = @product.weight
-%p
-  %b Quantity:
-  = @product.quantity
-%p
-  %b Cost:
-  = @product.cost
-%p
-  %b Freight modifier:
-  = @product.freight_modifier
-%p
-  %b Price modifier:
-  = @product.price_modifier
+.row-fluid
 
-= link_to 'Edit', edit_product_path(@product)
-\|
-= link_to 'Back', products_path
+  .span2
+    %ul.nav.nav-list.well
+      %li.nav-header= t('.actions', :default => t("helpers.actions"))
+      %li= link_to t('.list', :default => t("helpers.links.list")), products_path
+      %li= link_to t('.new', :default => t("helpers.links.new")), new_product_path
+      %li.active= link_to t('.show', :default => t("helpers.links.show")), product_path(@product)
+      %li= link_to t('.edit', :default => t("helpers.links.edit")), edit_product_path(@product)
+      %li= link_to t('.destroy', :default => t("helpers.links.destroy")), product_path(@product), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+
+  .span10
+    = bootstrap_flash
+
+    %h2 Atributos
+    %div.form-horizontal
+      %div.control-group
+        %label.control-label= model_class.human_attribute_name(:description)
+        %div.controls
+          %div.imput= @product.description
+      %div.control-group
+        %label.control-label= model_class.human_attribute_name(:quantity)
+        %div.controls
+          %div.imput= @product.quantity
+      %div.control-group
+        %label.control-label= model_class.human_attribute_name(:weight)
+        %div.controls
+          %div.imput= number_to_weight @product.weight
+      %div.control-group
+        %label.control-label= model_class.human_attribute_name(:supplier)
+        %div.controls
+          %div.imput= link_to @product.supplier.name, supplier_path(@product.supplier)
+
+      %h2 Precios relacionados
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Compra
+            %th Precio provisorio
+            %th Costo UB
+            %th Precio de venta
+            %th ¿Preseleccionado?
+        %tbody
+          - @product.prices.each do |prices|
+            - purchase = prices.purchase
+            %tr.pointer{'data-link' => purchase_path(purchase)}
+              %td= link_to l(purchase.date, format: :short), purchase_path(purchase)
+              %td= number_to_currency prices.provisional
+              %td= (number_to_currency prices.cost) || '-'
+              %td= (number_to_currency prices.sale) || '-'
+              %td
+                - if prices.preselected
+                  %i.icon-ok
+                - else
+                  \-
+

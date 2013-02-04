@@ -7,8 +7,12 @@ gem 'rails', '3.2.7'
 
 gem 'sqlite3'
 gem 'haml-rails'
+gem 'less-rails'
+gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 gem 'simple_form'
+gem 'rails-i18n'
+#gem 'delocalize'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,6 +28,9 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+gem 'pry-rails', :group => :development
+gem 'yaml_db', :group => :development
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

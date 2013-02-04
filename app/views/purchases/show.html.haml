@@ -1,0 +1,61 @@
+- model_class = Purchase
+.page-header
+  %h1
+    =t '.title', :default => model_class.model_name.human
+    %small= l @purchase.date, format: :short
+
+.row-fluid
+
+  .span2
+    %ul.nav.nav-list.well
+      %li.nav-header= t('.actions', :default => t("helpers.actions"))
+      %li= link_to t('.list', :default => t("helpers.links.list")), purchases_path
+      %li= link_to t('.new', :default => t("helpers.links.new")), new_purchase_path
+      %li.active= link_to t('.show', :default => t("helpers.links.show")), purchase_path(@purchase)
+      %li= link_to t('.edit', :default => t("helpers.links.edit")), edit_purchase_path(@purchase)
+      %li= link_to t('.destroy', :default => t("helpers.links.destroy")), purchase_path(@purchase), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+      %li.nav-header Acciones específicas
+      %li= link_to 'Cargar precios', load_prices_path(@purchase)
+      %li= link_to 'Preseleccionar', preselect_path(@purchase)
+      %li= link_to 'Definir márgenes', set_margins_path(@purchase)
+
+  .span10
+    = bootstrap_flash
+    
+    %h2 Atributos
+    %div.form-horizontal
+      %div.control-group
+        %label.control-label= model_class.human_attribute_name(:date)
+        %div.controls
+          %div.imput= l @purchase.date, format: :long
+      %div.control-group
+        %label.control-label= model_class.human_attribute_name(:status)
+        %div.controls
+          %div.imput= @purchase.status
+    
+    %h2 Precios relacionados
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Producto
+          %th Unidades
+          %th Peso
+          %th Precio provisorio
+          %th Costo UB
+          %th Precio de venta
+          %th ¿Preseleccionado?
+      %tbody
+        - @purchase.prices.each do |prices|
+          - product = prices.product
+          %tr.pointer{'data-link' => product_path(product)}
+            %td= link_to product.description, product_path(product)
+            %td= product.quantity
+            %td= number_to_weight product.weight
+            %td= number_to_currency prices.provisional
+            %td= (number_to_currency prices.cost) || '-'
+            %td= (number_to_currency prices.sale) || '-'
+            %td
+              - if prices.preselected
+                %i.icon-ok
+              - else
+                \-

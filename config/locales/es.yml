@@ -1,0 +1,77 @@
+es-AR:
+  activerecord:
+    models:
+      supplier:
+        one: Proveedor
+        other: Proveedores
+      product:
+        one: Producto
+        other: Productos
+      purchase:
+        one: Compra
+        other: Compras
+      order:
+        one: Orden
+        other: Órdenes
+    attributes:
+      supplier:
+        name:
+          one: Nombre
+      product:
+        description:
+          one: Descripción
+        quantity:
+          one: Unidades
+        weight:
+          one: Peso
+        supplier:
+          one: Proveedor
+      purchase:
+        date:
+          one: Fecha
+        status:
+          one: Estado
+  helpers:
+    titles:
+      new: Nuevo
+      edit: Editando
+    actions: Acciones
+    links:
+      cancel: Cancelar
+      back: Volver
+      list: Listar
+      new: Crear
+      edit: Editar
+      show: Mostrar
+      destroy: Eliminar
+      confirm: ¿Eliminar?
+  weight:
+    unit:
+      one: kg
+      other: kg
+  date:
+    day_names:
+    - Domingo
+    - Lunes
+    - Martes
+    - Miércoles
+    - Jueves
+    - Viernes
+    - Sábado
+    abbr_month_names:
+    - 
+    - Ene
+    - Feb
+    - Mar
+    - Abr
+    - May
+    - Jun
+    - Jul
+    - Ago
+    - Sep
+    - Oct
+    - Nov
+    - Dic
+    formats:
+      short: '%e %b'
+      long: '%A, %e de %B de %Y'

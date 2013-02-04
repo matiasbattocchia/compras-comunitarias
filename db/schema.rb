@@ -11,117 +11,62 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121004203937) do
+ActiveRecord::Schema.define(:version => 20130126190929) do
 
-  create_table "attendances", :force => true do |t|
-    t.integer  "meeting_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "attendances", ["meeting_id"], :name => "index_attendances_on_meeting_id"
-
-  create_table "basic_units", :force => true do |t|
-    t.string   "name"
-    t.string   "commune"
-    t.string   "neighborhood"
-    t.string   "address"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "bundles", :force => true do |t|
-    t.string   "product"
-    t.integer  "size"
-    t.decimal  "weight"
-    t.decimal  "cost"
-    t.decimal  "crate_cost"
-    t.decimal  "with_freight_cost"
-    t.decimal  "price"
-    t.string   "status"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
-
-  create_table "feed_tables", :force => true do |t|
-    t.decimal  "balance"
-    t.string   "unload_address"
-    t.string   "sale_address"
-    t.time     "open_time"
-    t.time     "close_time"
-    t.string   "modality"
-    t.string   "other_activities"
-    t.integer  "basic_unit_id"
-    t.integer  "attendance_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "feed_tables", ["attendance_id"], :name => "index_feed_tables_on_attendance_id"
-  add_index "feed_tables", ["basic_unit_id"], :name => "index_feed_tables_on_basic_unit_id"
-
-  create_table "line_bundles", :force => true do |t|
-    t.integer  "bundle_id"
-    t.integer  "order_id"
+  create_table "order_items", :force => true do |t|
     t.integer  "quantity"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "line_bundles", ["bundle_id"], :name => "index_line_bundles_on_bundle_id"
-  add_index "line_bundles", ["order_id"], :name => "index_line_bundles_on_order_id"
-
-  create_table "meetings", :force => true do |t|
-    t.date     "date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "order_line_products", :force => true do |t|
     t.integer  "order_id"
-    t.integer  "product_id"
-    t.integer  "quantity"
+    t.integer  "prices_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "order_line_products", ["order_id"], :name => "index_order_line_products_on_order_id"
-  add_index "order_line_products", ["product_id"], :name => "index_order_line_products_on_product_id"
+  add_index "order_items", ["order_id"], :name => "index_order_items_on_order_id"
+  add_index "order_items", ["prices_id"], :name => "index_order_items_on_prices_id"
 
   create_table "orders", :force => true do |t|
-    t.integer  "feed_table_id"
-    t.decimal  "weight"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "prices", :force => true do |t|
+    t.integer  "purchase_id"
+    t.integer  "product_id"
+    t.decimal  "provisional"
     t.decimal  "cost"
-    t.decimal  "crate_cost"
-    t.decimal  "with_freight_cost"
-    t.decimal  "price"
-    t.integer  "bundles"
-    t.integer  "crates"
-    t.string   "status"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.decimal  "sale"
+    t.decimal  "purchase"
+    t.decimal  "crate"
+    t.boolean  "preselected"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  add_index "orders", ["feed_table_id"], :name => "index_orders_on_feed_table_id"
-
-  create_table "payments", :force => true do |t|
-    t.decimal  "amount"
-    t.integer  "feed_table_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "payments", ["feed_table_id"], :name => "index_payments_on_feed_table_id"
+  add_index "prices", ["product_id"], :name => "index_prices_on_product_id"
+  add_index "prices", ["purchase_id"], :name => "index_prices_on_purchase_id"
 
   create_table "products", :force => true do |t|
-    t.string   "name"
-    t.integer  "weight"
+    t.string   "description"
     t.integer  "quantity"
-    t.decimal  "cost"
-    t.integer  "freight_modifier"
-    t.integer  "price_modifier"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.decimal  "weight"
+    t.integer  "supplier_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "products", ["supplier_id"], :name => "index_products_on_supplier_id"
+
+  create_table "purchases", :force => true do |t|
+    t.date     "date"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "suppliers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

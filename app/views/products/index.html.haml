@@ -1,29 +1,29 @@
-%h1 Listing products
+- model_class = Product
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human(count: 'other')
 
-%table
-  %tr
-    %th Name
-    %th Weight
-    %th Quantity
-    %th Cost
-    %th Freight modifier
-    %th Price modifier
-    %th
-    %th
-    %th
+.row-fluid
 
-  - @products.each do |product|
-    %tr
-      %td= product.name
-      %td= product.weight
-      %td= product.quantity
-      %td= product.cost
-      %td= product.freight_modifier
-      %td= product.price_modifier
-      %td= link_to 'Show', product
-      %td= link_to 'Edit', edit_product_path(product)
-      %td= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Product', new_product_path
+  .span2
+    %ul.nav.nav-list.well
+      %li.nav-header= t('.actions', :default => t("helpers.actions"))
+      %li.active= link_to t('.list', :default => t("helpers.links.list")), products_path
+      %li= link_to t('.new', :default => t("helpers.links.new")), new_product_path
+  
+  .span10
+    = bootstrap_flash
+    
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= model_class.human_attribute_name(:description)
+          %th= model_class.human_attribute_name(:quantity)
+          %th= model_class.human_attribute_name(:weight)
+          %th= model_class.human_attribute_name(:supplier)
+      %tbody
+        - @products.each do |product|
+          %tr.pointer{'data-link' => product_path(product)}
+            %td= link_to product.description, product_path(product)
+            %td= product.quantity
+            %td= number_to_weight product.weight
+            %td= product.supplier.name

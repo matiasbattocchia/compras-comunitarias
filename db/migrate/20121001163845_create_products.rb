@@ -1,14 +1,13 @@
 class CreateProducts < ActiveRecord::Migration
   def change
     create_table :products do |t|
-      t.string :name
-      t.integer :weight
+      t.string  :description
       t.integer :quantity
-      t.decimal :cost
-      t.integer :freight_modifier
-      t.integer :price_modifier
+      t.decimal :weight
+      t.references :supplier
 
       t.timestamps
     end
+    add_index :products, :supplier_id
   end
 end
