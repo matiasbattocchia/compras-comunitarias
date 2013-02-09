@@ -34,6 +34,7 @@ require (['jquery', 'backbone'], function ComprasComunitarias ($, BB) {
         $.mobile.hashListeningEnabled           = false;
         $.mobile.pushStateEnabled               = false;
         $.mobile.changePage.defaults.changeHash = false;
+        $.mobile.defaultPageTransition          = 'slide';
 
         $('div[data-role="page"]').live('pagehide', function(event, ui) {
             $(event.currentTarget).remove()
@@ -43,7 +44,9 @@ require (['jquery', 'backbone'], function ComprasComunitarias ($, BB) {
         // working on separate machines; this should be removed at some
         // point. For the time being, consider it a shameless hack.
         $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-            options.url = 'proxy.php?proxy_url=api.comunitarias:3000/' + options.url;
+            options.url = 'api/' + options.url;
+            options.dataType = 'json';
+            // options.url = 'proxy.php?proxy_url=api.comunitarias:3000/' + options.url;
         });
 
     });

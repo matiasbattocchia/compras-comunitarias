@@ -1,0 +1,14 @@
+<div data-role="header">
+    <a class="btn-cancel" data-role="button" data-icon="back" href="#">Volver</a>
+    <h1>{{title}}</h1>
+</div>
+
+<div data-role="content">
+    {{#description}}
+        <h2>{{{description}}}</h2>
+    {{/description}}
+
+    <label for="prompt-field" class="ui-hidden-accessible">{{{caption}}}</label>
+    <input type="text" name="prompt-field" class="prompt-field" id="prompt-field" value="{{value}}" placeholder="{{placeholder}}"/>
+    <button class="btn-accept" data-role="button" data-icon="check">Aceptar</button>
+</div>

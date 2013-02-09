@@ -1,3 +1,6 @@
+RewriteEngine on
+RewriteRule ^api/(.*)$ http://api.comunitarias:3000/$1 [P]
+
 <filesMatch ".(html|htm|js|css)$">
 FileETag None
 <ifModule mod_headers.c>

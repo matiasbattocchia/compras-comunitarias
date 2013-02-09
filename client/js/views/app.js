@@ -14,12 +14,13 @@ define (function (require, exports, module) {
         initialize: function () {
             // We usually want to bind the events to the view, rather than the
             // router:
-            _.bindAll(this, 'mainMenu', 'productsMenu');
+            _.bindAll(this, 'mainMenu', 'productsMenu', 'showPage');
 
             // Add event handlers for the router:
             this.router = this.options.router;
             this.router.on('route:mainMenu'    , this.mainMenu    );
             this.router.on('route:productsMenu', this.productsMenu);
+            this.router.on('showPage'          , this.showPage    );
         },
 
         mainMenu: function () {
