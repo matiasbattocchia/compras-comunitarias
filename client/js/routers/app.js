@@ -3,9 +3,9 @@ define (function (require, exports, module) {
 
     var AppRouter = BB.Router.extend ({
         routes: {
-            ''          : 'mainMenu',
-            'products/' : 'productsMenu',
-            // 'main-menu': 'mainMenu',
+            ''             : 'mainMenu',
+            'products/:id' : 'productPage',
+            'products/'    : 'productsMenu'
         }
     });
 

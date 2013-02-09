@@ -17,24 +17,23 @@ define (function (require, exports, module) {
         },
 
         toggleAddMode: function (e) {
-            var addMode, accept, cancel;
+            var self = this, addMode, accept, cancel;
             e.preventDefault();
 
-            cancel = function (e) { this.router.trigger('route:productsMenu'); }
+            finish = function (e) { self.router.trigger('route:productsMenu'); }
 
             accept = function (e) {
-                var self = this;
-                var name = addMode.field.val();
-                if (name) {
-                    this.collection.create ({
+                var self = this,
+                    name = addMode.field.val();
+                
+                $.mobile.showPageLoadingMsg();
+                // If there's a valid name, create the model and finish
+                name && this.collection.create ({
                         'description': name
-                    }, 
-                    {
-                        success: function () {
-                            self.router.trigger('route:productsMenu');
-                        }
-                    });
-                }
+                     }, {success: function () {
+                            $.mobile.hidePageLoadingMsg();
+                            finish();
+                        }});
             }
 
             addMode = new PromptView ({
@@ -44,9 +43,7 @@ define (function (require, exports, module) {
                 'caption'    : 'Producto',
             });
 
-
-
-            addMode.on('cancel', _.bind(cancel, this));
+            addMode.on('cancel', _.bind(finish, this));
             addMode.on('accept', _.bind(accept, this));
 
             this.router.trigger('showPage', addMode);
