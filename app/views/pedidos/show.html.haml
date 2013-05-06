@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Estado:
+  = @pedido.estado
+
+= link_to 'Edit', edit_pedido_path(@pedido)
+\|
+= link_to 'Back', pedidos_path
