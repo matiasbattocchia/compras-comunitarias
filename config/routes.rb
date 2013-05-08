@@ -1,4 +1,7 @@
 Compras::Application.routes.draw do
+  resources :nodos
+
+
   resources :pedidos
 
 

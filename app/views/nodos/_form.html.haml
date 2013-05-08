@@ -1,0 +1,13 @@
+= form_for @nodo do |f|
+  - if @nodo.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@nodo.errors.count, "error")} prohibited this nodo from being saved:"
+      %ul
+        - @nodo.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :nombre
+    = f.text_field :nombre
+  .actions
+    = f.submit 'Save'

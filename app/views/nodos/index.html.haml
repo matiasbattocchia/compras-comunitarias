@@ -1,0 +1,19 @@
+%h1 Listing nodos
+
+%table
+  %tr
+    %th Nombre
+    %th
+    %th
+    %th
+
+  - @nodos.each do |nodo|
+    %tr
+      %td= nodo.nombre
+      %td= link_to 'Show', nodo
+      %td= link_to 'Edit', edit_nodo_path(nodo)
+      %td= link_to 'Destroy', nodo, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Nodo', new_nodo_path

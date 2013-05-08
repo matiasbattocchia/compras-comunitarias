@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Nombre:
+  = @nodo.nombre
+
+= link_to 'Edit', edit_nodo_path(@nodo)
+\|
+= link_to 'Back', nodos_path
